@@ -30,7 +30,7 @@ Grove = GroveWaterSensor
 def main():
     from grove.helper import SlotHelper
     sh = SlotHelper(SlotHelper.ADC)
-    pin = sh.argv2pin()
+    pin = 0
 
     sensor = GroveWaterSensor(pin)
 
@@ -42,7 +42,7 @@ def main():
         else:
             print("{}, Dry.".format(value))
 
-        time.sleep(.1)
+        time.sleep(1)
 
 if __name__ == '__main__':
     main()
