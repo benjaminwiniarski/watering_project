@@ -22,7 +22,7 @@ while True:
         # Send the HTTP request to Funnel
         print("Sending data %s to Funnel..." % (json.dumps(payload)))
         try:
-            r = requests.post('http://funnel.soracom.io', data=json.dumps(payload), headers=headers, timeout=5)
+            r = requests.post('funnel.soracom.io', data=json.dumps(payload), headers=headers, timeout=5)
             print(r)
         except requests.exceptions.ConnectTimeout:
             print('ERROR: connection timeout. Is 3G connection online?')
