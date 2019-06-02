@@ -1,5 +1,3 @@
-print("hello world")
-
 import time, sys, math
 from grove.adc import ADC
 
@@ -37,10 +35,11 @@ def main():
     print('Detecting ...')
     while True:
         value = sensor.value
-        if sensor.value > 800:
+        print("Current Mositure Level: {}".format(value))
+        '''if sensor.value > 800:
             print("{}, Detected Water.".format(value))
         else:
-            print("{}, Dry.".format(value))
+            print("{}, Dry.".format(value))'''
 
         time.sleep(1)
 
