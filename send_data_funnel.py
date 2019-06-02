@@ -17,12 +17,12 @@ while True:
 
         # Set the HTTP request header and payload content
         headers = {"Content-Type": "application/json"}
-        payload = {'measure': moisture }
+        payload = {"measure": moisture }
 
         # Send the HTTP request to Harvest
         print("Sending data %s to Funnel..." % (json.dumps(payload)))
         try:
-            response = requests.post("http://unified.soracom.io", data=json.dumps(payload), headers=headers, timeout=5)
+            response = requests.post("http://unified.soracom.io", data=payload, headers=headers, timeout=5)
         except requests.exceptions.ConnectTimeout:
             print("Error: Connection timeout. Is the modem connected?")
 
