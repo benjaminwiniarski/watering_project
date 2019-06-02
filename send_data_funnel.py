@@ -17,7 +17,7 @@ while True:
 
         # Set the HTTP request header and payload content
         headers = {"Content-Type": "application/json"}
-        payload = {"measure": moisture }
+        payload = {'measure': moisture }
 
         # Send the HTTP request to Harvest
         print("Sending data %s to Funnel..." % (json.dumps(payload)))
