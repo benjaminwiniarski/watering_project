@@ -17,19 +17,22 @@ while True:
 
         # Set the HTTP request header and payload content
         headers = {"Content-Type": "application/json"}
-        payload = {"moisture": moisture }
+        payload = {"measure": moisture }
 
-        # Send the HTTP request to Funnel
+        # Send the HTTP request to Harvest
         print("Sending data %s to Funnel..." % (json.dumps(payload)))
         try:
-            r = requests.post('funnel.soracom.io', data=json.dumps(payload), headers=headers, timeout=5)
-            print(r)
+            response = requests.post("http://unified.soracom.io", data=json.dumps(payload), headers=headers, timeout=5)
         except requests.exceptions.ConnectTimeout:
-            print('ERROR: connection timeout. Is 3G connection online?')
+            print("Error: Connection timeout. Is the modem connected?")
+
+        # Display HTTP request response
+        if response.status_code == 201:
+            print("Response 201: Success!")
+        elif response.status_code == 400:
+            print("Error 400: Funnel did not accept the data. Is Harvest enabled?")
             sys.exit(1)
-        if r.status_code == 400:
-            print('ERROR: failed to submit data. Did you configure Funnel for your SIM?')
-            sys.exit(1)
+
 
     # sleep until next loop
     time_to_wait = loop_start_time + interval - time.time()
