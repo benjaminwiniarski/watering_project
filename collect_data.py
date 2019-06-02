@@ -24,6 +24,14 @@ class GroveWaterSensor:
 
 Grove = GroveWaterSensor
 
+def get_measurement():
+    pin = 0
+
+    sensor = GroveWaterSensor(pin)
+
+    value = sensor.value
+    return value
+
 
 def main():
     from grove.helper import SlotHelper
