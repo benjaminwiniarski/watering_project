@@ -22,17 +22,14 @@ while True:
         # Send the HTTP request to Funnel
         print("Sending data %s to Funnel..." % (json.dumps(payload)))
         try:
-            response = requests.post("http://funnel.soracom.io", data=json.dumps(payload), headers=headers, timeout=5)
+            r = requests.post('http://funnel.soracom.io', data=json.dumps(payload), headers=headers, timeout=5)
+            print(r)
         except requests.exceptions.ConnectTimeout:
-            print("Error: Connection timeout. Is the modem connected?")
-
-        # Display HTTP request response
-        if response.status_code == 201:
-            print("Response 201: Success!")
-        elif response.status_code == 400:
-            print("Error 400: Funnel did not accept the data. Is Funnel enabled?")
+            print('ERROR: connection timeout. Is 3G connection online?')
             sys.exit(1)
-
+        if r.status_code == 400:
+            print('ERROR: failed to submit data. Did you configure Funnel for your SIM?')
+            sys.exit(1)
 
     # sleep until next loop
     time_to_wait = loop_start_time + interval - time.time()
